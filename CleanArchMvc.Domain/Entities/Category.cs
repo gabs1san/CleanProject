@@ -4,12 +4,36 @@ using System.Text;
 
 namespace CleanArchMvc.Domain.Entities
 {
-    public class Category
+    public sealed class Category : Entity
     {
-        public int Id { get; set; }
-        public int Name { get; set; }
+        
+        public string Name { get; private set; }
+
+        public Category(string name)
+        {
+            ValidateDomain(name);
+        }
+
+        public Category(int id, string name)
+        {
+            Domain.Validation.DomainExceptionValidation.When(id < 0,
+                "Invalid Id. Id must be greater than zero.");
+            ValidateDomain(name);
+
+        }
+
+        
 
         public ICollection<Product> Products { get; set; }
 
+        private void ValidateDomain(string name)
+        {
+            Domain.Validation.DomainExceptionValidation.When(string.IsNullOrEmpty(name),
+                "Invalid name. Name is required");
+            Domain.Validation.DomainExceptionValidation.When(name.Length < 3,
+                "Invalid name, too short, minimum 3 characters");
+            Name = name;
+
+        }
     }
 }
