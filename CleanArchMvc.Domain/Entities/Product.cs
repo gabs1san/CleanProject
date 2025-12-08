@@ -22,7 +22,7 @@ namespace CleanArchMvc.Domain.Entities
         public Product(int id, string name, string description, decimal price, int stock, string image)
         {
             Domain.Validation.DomainExceptionValidation.When(id < 0,
-               "Invalid Id. Id must be greater than zero.");
+               "Invalid Id value.");
             ValidateDomain(name, description, price, stock, image);
         }
 
