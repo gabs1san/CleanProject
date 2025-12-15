@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchMvc.Infra.Data.Repositories
 {
-    internal class CategoryRepository : ICategoryRepository
+    public class CategoryRepository : ICategoryRepository
     {
-        AplicationDbContext _categoryContext;
-        public CategoryRepository(AplicationDbContext context)
+        ApplicationDbContext _categoryContext;
+        public CategoryRepository(ApplicationDbContext context)
         {
             _categoryContext = context;
         }
